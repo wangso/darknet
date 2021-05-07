@@ -1,4 +1,4 @@
-# This is a modified version of the original darknet repo from: [Darknet]{https://github.com/pjreddie/darknet}
+# This is a modified version of the original darknet repo from: [Darknet](https://github.com/pjreddie/darknet)
 
 ### In this version, I have 
 
