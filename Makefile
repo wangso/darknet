@@ -1,15 +1,11 @@
 GPU=0
 CUDNN=0
-OPENCV=0
+OPENCV=1
 OPENMP=0
 DEBUG=0
+NUMPY=1
 
-ARCH= -gencode arch=compute_30,code=sm_30 \
-      -gencode arch=compute_35,code=sm_35 \
-      -gencode arch=compute_50,code=[sm_50,compute_50] \
-      -gencode arch=compute_52,code=[sm_52,compute_52]
-#      -gencode arch=compute_20,code=[sm_20,sm_21] \ This one is deprecated?
-
+ARCH= -gencode arch=compute_70,code=[sm_70,compute_70]
 # This is what I use, uncomment if you know your arch and want to specify
 # ARCH= -gencode arch=compute_52,code=compute_52
 
@@ -50,6 +46,11 @@ ifeq ($(GPU), 1)
 COMMON+= -DGPU -I/usr/local/cuda/include/
 CFLAGS+= -DGPU
 LDFLAGS+= -L/usr/local/cuda/lib64 -lcuda -lcudart -lcublas -lcurand
+endif
+
+ifeq ($(NUMPY), 1) 
+COMMON+= -DNUMPY -I/usr/include/python3.6/ -I/usr/lib/python3/dist-packages/numpy/core/include/numpy/
+CFLAGS+= -DNUMPY
 endif
 
 ifeq ($(CUDNN), 1) 
